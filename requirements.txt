@@ -1,0 +1,2 @@
+prompt-toolkit==3.0.16
+tableprint==0.9.1
