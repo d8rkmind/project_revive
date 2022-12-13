@@ -9,7 +9,7 @@ class InputValidaton(Validator):
         if text.startswith("options"):
             if len(text) > 7 and not text.startswith('set', 8) and not text.startswith('load', 8):
                 raise ValidationError(
-                    message="options require any of these two sub commands <set|load|unset> \
+                    message="options require any of these two sub commands <set|load> \
 [OPTIONS RESPECTIVELY]", cursor_position=k)
             elif text.startswith('set', 8) and len(text) == 11:
                 raise ValidationError(

@@ -29,5 +29,7 @@ class Store:
             for result in results:
                 if isinstance(result, dict):
                     table_print(result)
+                else:
+                    print(results)
         except IndexError:
             print("[-] There is no such element in the result")
