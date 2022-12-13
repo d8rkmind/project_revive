@@ -26,3 +26,9 @@ you can set multiple values at ones by seperating it with commas < key1=value1,k
             elif text.count(',') != 0 and text.count('=') != text.count(',') + 1:
                 raise ValidationError(
                     message="Missing options after last ',' ", cursor_position=k)
+        elif text.startswith("result"):
+            if len(text) > 6 and not text.removeprefix("result ").isdigit():
+                raise ValidationError(
+                    message="Index value should be an integer",
+                    cursor_position=k
+                )

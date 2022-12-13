@@ -1,24 +1,20 @@
-import threading
-from prompt_toolkit import PromptSession
-from core.prompt.validator import InputValidaton
-from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
-from core.prompt.const import Completer
-from core.threads import Thread
-from prompt_toolkit.styles import Style
-from core.settings import Threading_params
 import importlib
-import tableprint as tp
 
+from prompt_toolkit import PromptSession
+from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
+from prompt_toolkit.styles import Style
+
+from core.prompt.const import Completer
+from core.prompt.validator import InputValidaton
+from core.settings import Threading_params
+from core.threads import Thread
+from core.utils.store import Store
+from core.utils.table import table_print
 
 style = Style.from_dict({
     'bottom-toolbar': '#ffffff bg:#333333',
     'bottom-toolbar2': '#606060 bg:#ffffff',
 })
-
-
-def table_print(tablelist: dict):
-    if tablelist['value']:
-        tp.table(tablelist['value'], tablelist["header"])
 
 
 class Terminal:
@@ -30,6 +26,7 @@ class Terminal:
             "options": self.options,
             "run": self.run,
             "tasks": self.tasks,
+            "result": self.result
         }
         self.user_input = ""
         self.temp = None
@@ -44,9 +41,12 @@ class Terminal:
         }
         self.prompt()
 
+    def countRunning(self):
+        return sum(i.is_alive() for i in self.threadManager)
+
     def bottom_toolbar(self):
         return [('class:bottom-toolbar', f" [ Child Tasks -> Total: {len(self.threadManager)} \
- Active:{threading.active_count()-1} ] "),
+ Active:{self.countRunning()} ] "),
                 ('class:bottom-toolbar', f" Plugin : {self.option['plugin']}"),
                 ('class:bottom-toolbar2', self.err_toolbar),]
 
@@ -59,6 +59,12 @@ class Terminal:
             self.load.run(self.option)
 
         Threading_params.thread_limiter.release()
+
+    def result(self):
+        if len(self.temp) == 2:
+            Store.result_value(int(self.temp[1]))
+        else:
+            Store.result()
 
     def run(self):
         if self.option['plugin'] and self.option['target']:

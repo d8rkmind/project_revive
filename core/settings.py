@@ -1,7 +1,7 @@
 import os
 import ssl
-# import random
-# import string
+import random
+import string
 from threading import BoundedSemaphore
 
 import certifi
@@ -17,8 +17,7 @@ class Server:
     server_port = 30000
     ping_time = 4
     ssl = sslcert
-    # storage = f"db/{''.join(random.choices(string.ascii_uppercase + string.digits, k= 5))}.result"
-    storage = "db/UXC7C.result"
+    storage = f"db/{''.join(random.choices(string.ascii_uppercase + string.digits, k= 5))}.result"
 
 
 class Threading_params:

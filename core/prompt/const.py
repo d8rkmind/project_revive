@@ -1,5 +1,6 @@
-from prompt_toolkit.completion import NestedCompleter
 import os
+
+from prompt_toolkit.completion import NestedCompleter
 
 PLUGIN = str(os.path.join(os.getcwd(), 'plugin'))
 
@@ -15,7 +16,8 @@ completer_values = {
     'run': None,
     'tasks': {
         "kill": None,
-    }
+    },
+    'result': None
 }
 
 Completer = NestedCompleter.from_nested_dict(completer_values)
