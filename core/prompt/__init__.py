@@ -47,7 +47,8 @@ class Terminal:
     def bottom_toolbar(self):
         return [('class:bottom-toolbar', f" [ Child Tasks -> Total: {len(self.threadManager)} \
  Active:{threading.active_count()-1} ] "),
-                ('class:bottom-toolbar2', self.err_toolbar)]
+                ('class:bottom-toolbar', f" Plugin : {self.option['plugin']}"),
+                ('class:bottom-toolbar2', self.err_toolbar),]
 
     def default(self):
         return
@@ -62,7 +63,7 @@ class Terminal:
     def run(self):
         if self.option['plugin'] and self.option['target']:
             thread = Thread(target=self.func,
-                            name=f"{self.option['plugin']}_{self.option['target']}",
+                            name=f"{self.option['plugin']}-{self.option['target']}",
                             daemon=True)
             thread.start()
             self.threadManager.append(thread)
@@ -103,7 +104,7 @@ class Terminal:
         else:
             table_print({
                 "header": ["T.No", "Plugin", "Target", "Status"],
-                "value": [[index + 1, *str(i.name).strip().split("_"), "Alive" if i.is_alive() else
+                "value": [[index + 1, *str(i.name).strip().split("-"), "Alive" if i.is_alive() else
                            "Dead"]
                           for index, i in enumerate(self.threadManager)]
             })
