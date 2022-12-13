@@ -43,7 +43,7 @@ def run(options: dict):
 ### 1. **Resquest** ( from core.utils.request import request ) :
   * This function can be used to send 'GET' request to any given list of urls 
   * Will return a list of data (json/text) 
-  * Uses `aiohttp` to send requestes 
+  * Uses `aiohttp` to send requests 
   * Takes two arguments
     *  `urls: list` -> list of all url to send the reques
     *  `is_text: bool = False` -> specified the type of returned list (json/text)
