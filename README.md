@@ -1,6 +1,6 @@
 # Poject_Revive
 
-> **This project is still in its development state and major reworks will be done to the framework**
+> **This project is still in development, and the framework will undergo significant changes.**
 
 
 ## How to write a plugin:
