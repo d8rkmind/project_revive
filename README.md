@@ -24,7 +24,7 @@ def run(options: dict):
     print(options)
 
 ```
-> Note : to print table data should be stored in the following format
+> Note : to print table, data should be stored in the following format
 ```python3
     # ri is refering row number 
     # ci is refering column number 
