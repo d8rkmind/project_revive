@@ -17,7 +17,7 @@ class Store:
     def result():
         mydict = SqliteDict(Server.storage)
         table_print({
-            'header': ['Si', 'Plugin', 'Target', 'Stored at-'],
+            'header': ['Si', 'Plugin', 'Target', 'Stored at'],
             'value': [[str(index + 1), *str(i).strip().split("&")] for index, i in
                       enumerate(mydict)]
         })

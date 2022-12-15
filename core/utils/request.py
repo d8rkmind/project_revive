@@ -7,6 +7,8 @@ from core.settings import Server
 
 async def __response__(session: aiohttp.ClientSession, url: str, is_text):
     async with session.get(url, ssl=Server.ssl) as response:
+        if response.status == 404:
+            return False
         if is_text:
             return await response.text()
         else:
