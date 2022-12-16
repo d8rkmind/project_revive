@@ -1,2 +1,5 @@
-prompt-toolkit==3.0.16
-termtables==0.2.4
+certifi
+prompt_toolkit
+sqlitedict
+prettytable
+aiohttp
