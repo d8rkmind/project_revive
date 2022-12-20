@@ -9,7 +9,7 @@ def run(option: dict):
     q = Query()
     email = str(option["target"])
     response = q.get(f'https://api.github.com/search/users?q={email}', isText=True)
-    username = re.findall(r'"login":"(.*?)"', response[0])
+    username = re.findall(r'"login":"(.*?)"', response)
     if not username:
         print("[-] No username found")
         return

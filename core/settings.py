@@ -2,6 +2,7 @@ import os
 import ssl
 import random
 import string
+import json
 from threading import BoundedSemaphore
 
 import certifi
@@ -18,6 +19,17 @@ class Server:
     ping_time = 4
     ssl = sslcert
     storage = f"db/{''.join(random.choices(string.ascii_uppercase + string.digits, k= 5))}.result"
+
+
+class Api:
+    try:
+        with open('api_keys.json') as f:
+            data = json.load(f)
+        censys_api_id: str = data['censys']['api_id']
+        censys_api_secret: str = data['censys']['api_secret']
+
+    except FileNotFoundError:
+        print("[-] Unable to find 'api_keys.json' file. Modules that require api keys.")
 
 
 class Threading_params:

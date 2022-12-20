@@ -25,7 +25,7 @@ def run(option: dict):
     response = q.get(f'https://api.github.com/users/{username}/repos?per_page=100&sort=pushed',
                      isText=True)
     repos = re.findall(
-        r'"full_name":"%s/(.*?)",.*?"fork":(.*?),' % username, response[0])
+        r'"full_name":"%s/(.*?)",.*?"fork":(.*?),' % username, response)
 
     table2 = {
         'header': ['Public Repos', 'Forked'],

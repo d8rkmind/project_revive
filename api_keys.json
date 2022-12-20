@@ -1,0 +1,6 @@
+{
+    "censys": {
+        "api_id": "Your id here from : 'https://search.censys.io/account/api'",
+        "api_secret": "Your Secret here "
+    }
+}

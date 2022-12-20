@@ -12,7 +12,7 @@ class Store:
             with SqliteDict(Server.storage, autocommit=True) as i:
                 i[f'{option["plugin"]}&{option["target"]}&{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}'] = data
         except Exception as e:
-            print(e.with_traceback)
+            print(e.with_traceback())
 
     def result():
         mydict = SqliteDict(Server.storage)

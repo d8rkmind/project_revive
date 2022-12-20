@@ -13,7 +13,7 @@ class Query(object):
         async with httpx.AsyncClient(verify=Server.ssl) as client:
             response = await client.get(url, **kwargs)
             if isText:
-                return [response.text]
+                return response.text
             else:
                 return response.json()
 
@@ -40,5 +40,21 @@ class Query(object):
         elif isinstance(url, str):
             result = loop.run_until_complete(
                 self.__get_client_str__(url, isText, **kwargs)
+            )
+        return result
+
+    async def __post_client_str__(self, url: str, isText: bool, **kwargs):
+        async with httpx.AsyncClient(verify=Server.ssl) as client:
+            response = await client.post(url, **kwargs)
+            if isText:
+                return response.text
+            else:
+                return response.json()
+
+    def post(self, url, isText=False, **kwargs):
+        loop = asyncio.new_event_loop()
+        if isinstance(url, str):
+            result = loop.run_until_complete(
+                self.__post_client_str__(url, isText, **kwargs)
             )
         return result
